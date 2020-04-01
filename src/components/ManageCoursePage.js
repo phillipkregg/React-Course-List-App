@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Prompt } from 'react-router-dom';
 import CourseForm from './CourseForm';
+import * as courseApi from '../api/courseApi';
+import { toast } from 'react-toastify';
 
 const ManageCoursePage = props => {
   const [course, setCourse] = useState({
@@ -18,10 +20,22 @@ const ManageCoursePage = props => {
     });
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    courseApi.saveCourse(course).then(() => {
+      props.history.push('/courses');
+      toast.success(`The ${course.title} course was saved!`);
+    });
+  }
+
   return (
     <>
       <h2>Manage Course</h2>
-      <CourseForm course={course} onChange={handleChange} />
+      <CourseForm
+        course={course}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 };
