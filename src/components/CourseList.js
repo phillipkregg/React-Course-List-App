@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 function CourseList(props) {
   const courses = props.courses;
+  const onDelete = props.onDelete;
 
   return (
     <table className="table">
@@ -12,10 +13,11 @@ function CourseList(props) {
           <th>Title</th>
           <th>Authors ID</th>
           <th>Category</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        {courses.map(course => {
+        {courses.map((course) => {
           return (
             <tr key={course.id}>
               <td>
@@ -23,6 +25,16 @@ function CourseList(props) {
               </td>
               <td>{course.authorId}</td>
               <td>{course.category}</td>
+              <td>
+                <button
+                  className={'btn btn-outline-danger'}
+                  onClick={() => {
+                    onDelete(course);
+                  }}
+                >
+                  delete
+                </button>
+              </td>
             </tr>
           );
         })}
@@ -32,18 +44,19 @@ function CourseList(props) {
 }
 
 CourseList.propTypes = {
+  onDelete: PropTypes.func.isRequired,
   courses: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       authorId: PropTypes.number.isRequired,
-      category: PropTypes.string.isRequired
+      category: PropTypes.string.isRequired,
     })
-  )
+  ),
 };
 
 CourseList.defaultProps = {
-  courses: []
+  courses: [],
 };
 
 export default CourseList;
