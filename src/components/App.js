@@ -2,7 +2,7 @@ import React from 'react';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import Header from './common/Header';
-import CoursesPage from './Courses';
+import CoursesPage from './CoursesPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import NotFoundPage from './NotFoundPage';
 import ManageCoursePage from './ManageCoursePage';
